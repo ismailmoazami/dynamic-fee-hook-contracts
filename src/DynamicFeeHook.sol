@@ -40,7 +40,7 @@ contract DynamicFeeHook is BaseHook {
                     afterInitialize: false,
                     beforeAddLiquidity: false,
                     beforeRemoveLiquidity: false,
-                    afterAddLiquidity: true,
+                    afterAddLiquidity: false,
                     afterRemoveLiquidity: false,
                     beforeSwap: true,
                     afterSwap: true,
@@ -94,7 +94,7 @@ contract DynamicFeeHook is BaseHook {
 
     function _getFee() internal view returns(uint24) {
         if(tx.gasprice >= (movingAverageGasPrice * 11) / 10) {
-            return BASE_FEE / 5;
+            return BASE_FEE / 2; 
         }
         if(tx.gasprice <= (movingAverageGasPrice * 9) / 10) {
             return BASE_FEE * 2;
